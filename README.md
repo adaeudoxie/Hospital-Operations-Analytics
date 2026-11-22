@@ -37,7 +37,7 @@ and which procedures and encounter classes drive utilization?
 - Five commercial payers record near-zero coverage, which points to incomplete payer data.
 
 The full analysis and recommendations are in the [Business Report](docs/Business%20Report.pdf)
-and the [Executive Summary](docs/07_executive_summary.md).
+and the [Executive Summary](https://github.com/adaeudoxie/Hospital-Operations-Analytics/blob/main/docs/07%20-%20Executive%20Summary.md).
 
 ## Dashboard
 
@@ -46,33 +46,6 @@ and the [Executive Summary](docs/07_executive_summary.md).
 | ![Encounter Volume Trends](dashboards/Encounter%20Volume%20Trends.jpg) | ![Encounter Class Comparison](dashboards/Encounter%20Class%20Comparison.jpg) |
 | ![Cost & Payer Coverage](dashboards/Cost%20%26%20Payer%20Coverage.jpg) | ![Procedure Utilization](dashboards/Procedure%20Utilization.jpg) |
 
-## Repository Structure
-
-```
-hospital-operations-analytics/
-├── README.md
-├── dashboards/          Dashboard page images
-├── data/                Source CSVs (patient names and addresses removed)
-├── docs/
-│   ├── Business Report.pdf
-│   ├── 01_business_problem_and_success_criteria.md
-│   ├── 02_data_quality_assessment.md
-│   ├── 03_data_model_and_transformations.md
-│   ├── 04_kpi_definitions.md
-│   ├── 05_analysis_findings.md
-│   ├── 06_validation_evidence.md
-│   ├── 07_executive_summary.md
-│   └── KPI_Definitions_and_Validation.xlsx
-├── powerbi/
-│   ├── HospitalOps.pbix
-│   └── validation_query.dax
-├── python/
-│   ├── prepare_data.py
-│   └── analysis_and_validation.py
-└── sql/
-    └── hospital_analytics_answers.sql
-```
-
 ## Deliverables
 
 | Deliverable | Location |
@@ -80,10 +53,10 @@ hospital-operations-analytics/
 | Power BI dashboard | `powerbi/HospitalOps.pbix` |
 | Dashboard screenshots | `dashboards/` |
 | Business report | `docs/Business Report.pdf` |
-| Data quality assessment | `docs/02_data_quality_assessment.md` |
-| KPI definitions | `docs/04_kpi_definitions.md` and `docs/KPI_Definitions_and_Validation.xlsx` |
-| Validation evidence | `docs/06_validation_evidence.md` and `powerbi/validation_query.dax` |
-| Executive summary and recommendations | `docs/07_executive_summary.md` |
+| Data quality assessment | `docs/02 - data quality assessment.md` |
+| KPI definitions | `docs/04 - kpi definitions.md` and `docs/KPI Definitions & Validation.xlsx` |
+| Validation evidence | `docs/06 - validation evidence.md` and `powerbi/validation query.dax` |
+| Executive summary and recommendations | `docs/07 - executive summary.md` |
 
 ## Approach
 
@@ -91,7 +64,7 @@ The five CSV files (encounters, procedures, payers, patients and organizations) 
 into a Power BI star schema, with Encounters at the center and Procedures linked through
 Encounter Id. This lets the Year, Encounter Class and Payer slicers filter every visual. The
 data model and key transformations are described in
-[03_data_model_and_transformations.md](docs/03_data_model_and_transformations.md).
+[03 - Data Model & Transformations.md](https://github.com/adaeudoxie/Hospital-Operations-Analytics/blob/main/docs/03%20-%20Data%20Model%20%26%20Transformations.md).
 
 ## How to Use This Repository
 
