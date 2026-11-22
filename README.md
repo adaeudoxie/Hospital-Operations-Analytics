@@ -53,10 +53,10 @@ and the [Executive Summary](https://github.com/adaeudoxie/Hospital-Operations-An
 | Power BI dashboard | `powerbi/HospitalOps.pbix` |
 | Dashboard screenshots | `dashboards/` |
 | Business report | `docs/Business Report.pdf` |
-| Data quality assessment | `docs/02 - data quality assessment.md` |
-| KPI definitions | `docs/04 - kpi definitions.md` and `docs/KPI Definitions & Validation.xlsx` |
-| Validation evidence | `docs/06 - validation evidence.md` and `powerbi/validation query.dax` |
-| Executive summary and recommendations | `docs/07 - executive summary.md` |
+| Data quality assessment | `docs/02 - Data Quality Assessment.md` |
+| KPI definitions | `docs/04 - KPI Definitions.md` and `docs/KPI_Definitions_and_Validation.xlsx` |
+| Validation evidence | `docs/06 - Validation Evidence.md` and `powerbi/Validation Query.dax` |
+| Executive summary and recommendations | `docs/07 - Executive Summary.md` |
 
 ## Approach
 
@@ -77,14 +77,14 @@ backslash), and click **Refresh**.
 
 ```bash
 pip install pandas
-python python/analysis_and_validation.py
+python "python/Analysis & Validation.py"
 ```
 
 The script recalculates every KPI from the CSVs and saves the results to an `outputs` folder.
-To compare them with the dashboard, run `powerbi/validation_query.dax` in Power BI's DAX query
+To compare them with the dashboard, run `powerbi/Validation Query.dax` in Power BI's DAX query
 view and enter the results in `docs/KPI_Definitions_and_Validation.xlsx`.
 
-**SQL:** `sql/hospital_analytics_answers.sql` answers the reference questions in MySQL 8. It
+**SQL:** `sql/Hospital Analytics Answers.sql` answers the reference questions in MySQL 8. It
 runs against the database created by the course's `create_hospital_db.sql`. Note that this
 script starts by dropping any existing `hospital_db` database, so use a practice MySQL
 instance.

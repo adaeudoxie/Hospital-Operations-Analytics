@@ -18,4 +18,4 @@ erDiagram
 - Timestamps kept in UTC; SNOMED codes typed as text.
 - Added Duration Hours, Over 24 Hours, Zero Coverage, Uncovered Amount and a 30-day return flag.
 - No rows were removed and no values imputed.
-- Every KPI was independently recalculated in Python and SQL (see [Validation](06_validation_evidence.md)).
+- Every KPI was independently recalculated in Python and SQL (see [Validation](06%20-%20Validation%20Evidence.md)).

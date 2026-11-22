@@ -4,7 +4,7 @@
 --
 -- Answers the questions in hospital_analytics_questions.sql. These
 -- queries also act as an independent cross-check of the Power BI
--- dashboard (see docs/06_validation_evidence.md).
+-- dashboard (see docs/06 - Validation Evidence.md).
 --
 -- Prerequisite: hospital_db created with the provided create_hospital_db.sql.
 -- SAFETY: that script starts with DROP DATABASE IF EXISTS hospital_db.

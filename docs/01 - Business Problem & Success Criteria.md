@@ -6,7 +6,7 @@ A healthcare organization wants a clearer view of how its encounters, costs and 
 
 > ***Where is encounter volume and cost concentrated, how much of that cost is covered by payers, and which procedures and encounter classes drive utilization?***
 
-Eight sub-questions in the [Analysis Findings](05_analysis_findings.md) break this down into volume trends, class mix, length of stay, cost by class, payer coverage, procedure frequency, procedure cost and cost by payer.
+Eight sub-questions in the [Analysis Findings](05%20-%20Analysis%20Findings.md) break this down into volume trends, class mix, length of stay, cost by class, payer coverage, procedure frequency, procedure cost and cost by payer.
 
 ## Why It Matters
 

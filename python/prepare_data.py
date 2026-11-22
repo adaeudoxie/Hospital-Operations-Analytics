@@ -28,8 +28,10 @@ OUT = REPO / "data"
 PATIENT_KEEP = ["Id", "BIRTHDATE", "DEATHDATE", "MARITAL", "RACE",
                 "ETHNICITY", "GENDER", "COUNTY", "STATE"]
 
-COPY_AS_IS = ["encounters.csv", "procedures.csv", "payers.csv",
-              "organizations.csv", "data_dictionary.csv"]
+# Raw course file name -> name used in this repository's data folder
+COPY_AS_IS = {"encounters.csv": "Encounters.csv", "procedures.csv": "Procedures.csv",
+              "payers.csv": "Payers.csv", "organizations.csv": "Organizations.csv",
+              "data_dictionary.csv": "Data Dictionary.csv"}
 
 
 def main(raw_dir: str) -> None:
@@ -38,14 +40,14 @@ def main(raw_dir: str) -> None:
         sys.exit(f"encounters.csv not found in {raw}")
     OUT.mkdir(exist_ok=True)
 
-    for name in COPY_AS_IS:
-        shutil.copy2(raw / name, OUT / name)
-        print(f"copied   {name}")
+    for name, new_name in COPY_AS_IS.items():
+        shutil.copy2(raw / name, OUT / new_name)
+        print(f"copied   {name} -> {new_name}")
 
     patients = pd.read_csv(raw / "patients.csv", dtype=str)
     dropped = [c for c in patients.columns if c not in PATIENT_KEEP]
-    patients[PATIENT_KEEP].to_csv(OUT / "patients_deidentified.csv", index=False)
-    print(f"wrote    patients_deidentified.csv  (dropped: {', '.join(dropped)})")
+    patients[PATIENT_KEEP].to_csv(OUT / "Patients Deidentified.csv", index=False)
+    print(f"wrote    Patients Deidentified.csv  (dropped: {', '.join(dropped)})")
 
 
 if __name__ == "__main__":

@@ -1,14 +1,14 @@
 """
-analysis_and_validation.py
---------------------------
+Analysis & Validation.py
+-----------------------------------------------
 Independent recalculation of every KPI and analysis question in the Power BI
 dashboard, computed directly from the CSV files with pandas (no Power BI
 involved). The results are the "expected values" used in
-docs/06_validation_evidence.md to check the dashboard.
+docs/06 - Validation Evidence.md to check the dashboard.
 
 Usage (from the repository root):
     pip install pandas
-    python python/analysis_and_validation.py
+    python "python/Analysis & Validation.py"
 
 Outputs (written to outputs/):
     data_quality_profile.csv    column-level profile of every table
@@ -33,11 +33,11 @@ CLASS_LABELS = {"ambulatory": "Ambulatory", "outpatient": "Outpatient",
 
 
 def load():
-    enc = pd.read_csv(DATA / "encounters.csv")
-    proc = pd.read_csv(DATA / "procedures.csv")
-    pay = pd.read_csv(DATA / "payers.csv")
-    pat = pd.read_csv(DATA / "patients_deidentified.csv")
-    org = pd.read_csv(DATA / "organizations.csv")
+    enc = pd.read_csv(DATA / "Encounters.csv")
+    proc = pd.read_csv(DATA / "Procedures.csv")
+    pay = pd.read_csv(DATA / "Payers.csv")
+    pat = pd.read_csv(DATA / "Patients Deidentified.csv")
+    org = pd.read_csv(DATA / "Organizations.csv")
     for c in ("START", "STOP"):
         enc[c] = pd.to_datetime(enc[c], utc=True)
         proc[c] = pd.to_datetime(proc[c], utc=True)
