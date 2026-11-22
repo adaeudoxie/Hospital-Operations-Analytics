@@ -1,0 +1,56 @@
+// =====================================================================
+// Dashboard validation query
+// Paste into Power BI Desktop > DAX query view > Run.
+// Compare each value with outputs/kpi_expected_values.csv and
+// outputs/kpi_filtered_checks.csv (calculated independently in Python).
+// =====================================================================
+
+// 1) Headline KPIs, no filters. Expected values are in the comments.
+EVALUATE
+ROW (
+    "Total Encounters",          [Total Encounters],            // 27,891
+    "Unique Patients",           [Unique Patients],             // 974
+    "Total Claim Cost",          [Total Claim Cost],            // 101,514,375.52
+    "Avg Claim Cost",            [Avg Claim Cost],              // 3,639.68
+    "Median Claim Cost",         [Median Claim Cost],           // 278.58
+    "Total Payer Coverage",      [Total Payer Coverage],        // 31,097,506.99
+    "Payer Coverage Rate %",     [Payer Coverage Rate %],       // 0.3063
+    "Zero Coverage Encounters",  [Zero Coverage Encounters],    // 13,586
+    "Zero Coverage %",           [Zero Coverage %],             // 0.4871
+    "Encounters Over 24h",       [Encounters Over 24h],         // 75
+    "Encounters 24h or More",    [Encounters 24h or More],      // 1,152
+    "Total Procedures",          [Total Procedures],            // 47,701
+    "Avg Procedure Base Cost",   [Avg Procedure Base Cost],     // 2,212.06
+    "30-Day Return Encounters",  [30-Day Return Encounters],    // 16,875
+    "30-Day Return Rate %",      [30-Day Return Rate %]         // 0.6050
+)
+
+// 2) Filter behaviour: the same measures must change correctly under filters.
+EVALUATE
+UNION (
+    ROW ( "Filter", "Year = 2021",
+          "Encounters", CALCULATE ( [Total Encounters], 'Date'[Year] = 2021 ),                  // 3,530
+          "Claim Cost", CALCULATE ( [Total Claim Cost], 'Date'[Year] = 2021 ),                  // 9,177,232.00
+          "Zero Cov",   CALCULATE ( [Zero Coverage Encounters], 'Date'[Year] = 2021 ),          // 1,599
+          "Procedures", CALCULATE ( [Total Procedures], 'Date'[Year] = 2021 ) ),                // 4,387
+    ROW ( "Filter", "Class = Inpatient",
+          "Encounters", CALCULATE ( [Total Encounters], Encounters[Encounter Class] = "Inpatient" ),        // 1,135
+          "Claim Cost", CALCULATE ( [Total Claim Cost], Encounters[Encounter Class] = "Inpatient" ),        // 8,809,134.34
+          "Zero Cov",   CALCULATE ( [Zero Coverage Encounters], Encounters[Encounter Class] = "Inpatient" ),// 551
+          "Procedures", CALCULATE ( [Total Procedures], Encounters[Encounter Class] = "Inpatient" ) ),      // 3,137
+    ROW ( "Filter", "Payer = Medicare",
+          "Encounters", CALCULATE ( [Total Encounters], Payers[Payer] = "Medicare" ),           // 11,371
+          "Claim Cost", CALCULATE ( [Total Claim Cost], Payers[Payer] = "Medicare" ),           // 24,647,228.89
+          "Zero Cov",   CALCULATE ( [Zero Coverage Encounters], Payers[Payer] = "Medicare" ),   // 61
+          "Procedures", CALCULATE ( [Total Procedures], Payers[Payer] = "Medicare" ) ),         // 19,512
+    ROW ( "Filter", "Year = 2021 AND Class = Emergency",
+          "Encounters", CALCULATE ( [Total Encounters], 'Date'[Year] = 2021, Encounters[Encounter Class] = "Emergency" ),         // 221
+          "Claim Cost", CALCULATE ( [Total Claim Cost], 'Date'[Year] = 2021, Encounters[Encounter Class] = "Emergency" ),         // 1,010,922.49
+          "Zero Cov",   CALCULATE ( [Zero Coverage Encounters], 'Date'[Year] = 2021, Encounters[Encounter Class] = "Emergency" ), // 66
+          "Procedures", CALCULATE ( [Total Procedures], 'Date'[Year] = 2021, Encounters[Encounter Class] = "Emergency" ) )        // 110
+)
+
+// 3) Additivity: the per-year counts must add up to the grand total (27,891).
+EVALUATE
+VAR _byYear = SUMMARIZECOLUMNS ( 'Date'[Year], "Encounters", [Total Encounters] )
+RETURN ROW ( "Sum of years", SUMX ( _byYear, [Encounters] ), "Grand total", [Total Encounters] )
