@@ -109,4 +109,3 @@ from the original course dataset with those fields removed.
 Power BI Desktop (Power Query, DAX), Python (pandas), SQL (MySQL 8).
 
 The dataset and reference SQL questions come from the AnalystLab Africa Week 3 dataset pack.
-The data is synthetic, in the format of the open-source [Synthea](https://synthetichealth.github.io/synthea/) generator.
