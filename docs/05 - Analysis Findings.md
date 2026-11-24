@@ -2,7 +2,7 @@
 
 ![Dashboard Overview page](../dashboards/Executive%20Overview.jpg)
 
-*Figure 2. Dashboard Overview page (all six pages are in the `dashboards` folder)*
+*Figure 2. Dashboard Overview page (all five pages are in the `dashboards` folder)*
 
 ## Q1. How Have Encounter Volumes Changed Over Time?
 

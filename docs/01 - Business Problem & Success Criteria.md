@@ -36,6 +36,6 @@ Eight sub-questions in the [Analysis Findings](05%20-%20Analysis%20Findings.md) 
 |---|---|---|
 | Headline KPIs reconcile | Power BI = Python = SQL; counts exact, currency within $0.01 | Met: 17 of 17 KPIs |
 | Totals respond correctly to filters | 4 filter scenarios plus a per-year additivity check | Met: 17 of 17 checks |
-| All required analysis covered | 8 questions answered; 5+ KPIs defined; required dashboard pages | Met: 8 questions, 18 KPIs, 6 pages |
+| All required analysis covered | 8 questions answered; 5+ KPIs defined; required dashboard pages | Met: 8 questions, 18 KPIs, 5 pages |
 | No unnecessary patient identifiers | Names, addresses, ZIP codes and coordinates removed | Met |
 | Reproducible | Another analyst can rebuild from the README | Met |
