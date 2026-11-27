@@ -6,6 +6,9 @@
 
 ## Q1. How Have Encounter Volumes Changed Over Time?
 
+**Metric:** Encounters and unique patients per year.  
+**Method:** COUNTROWS(Encounters) and DISTINCTCOUNT(Patient Id), grouped by the year of the encounter START (UTC).
+
 | Year | 2011 | 2012 | 2013 | 2014 | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022* |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Encounters | 1,336 | 2,106 | 2,495 | **3,885** | 2,469 | 2,451 | 2,360 | 2,292 | 2,228 | 2,519 | **3,530** | 220 |
@@ -16,6 +19,9 @@
 **Implication:** plan capacity on the 2015–2020 baseline and confirm the 2021 rise is sustained before treating it as the new normal.
 
 ## Q2 & Q4. Encounter Class Share and Claim Cost by Class
+
+**Metric:** Share of encounters by class (Q2); total, average and median claim cost by class (Q4).  
+**Method:** Class encounters ÷ all encounters; SUM, AVERAGE and MEDIAN of TOTAL_CLAIM_COST by ENCOUNTERCLASS; cost share = class total ÷ overall total.
 
 | Class | Encounters | Share | Total Claim Cost | Share of Cost | Avg / Encounter | Median / Encounter |
 |---|---:|---:|---:|---:|---:|---:|
@@ -31,9 +37,17 @@ Non-admitted care (ambulatory, outpatient, urgent care) is **80.7%** of encounte
 
 ## Q3. What Proportion of Encounters Lasted More Than 24 Hours?
 
+**Metric:** Share of encounters lasting more than 24 hours.  
+**Method:** Duration = STOP − START in hours (all 27,891 encounters have valid, non-reversed timestamps); encounters with duration > 24 ÷ all encounters. The ≥ 24 hours count is shown as a sensitivity check.
+
 75 encounters (0.27%) lasted more than 24 hours; 58 of them are inpatient, while 1,077 encounters last exactly 24 hours (most inpatient stays).
 
+**Implication:** long stays are too rare to drive bed planning, but the 1,077 stays recorded at exactly 24 hours look like a default discharge time. Counting ≥ 24 hours instead gives 1,152 encounters (4.1%), 15 times more, so the definition must be fixed at the source before this KPI is used for capacity decisions.
+
 ## Q5 & Q8. Payer Coverage and Claim Cost by Payer
+
+**Metric:** Payer coverage rate and zero-coverage encounters (Q5); average and median claim cost by payer (Q8).  
+**Method:** SUM(PAYER_COVERAGE) ÷ SUM(TOTAL_CLAIM_COST); zero coverage = encounters where PAYER_COVERAGE = 0; AVERAGE and MEDIAN of TOTAL_CLAIM_COST by payer name.
 
 | Payer | Encounters | Avg. Claim | Median Claim | Coverage Rate | Zero-Coverage Share |
 |---|---:|---:|---:|---:|---:|
@@ -53,6 +67,9 @@ Payers covered **$31.1M of $101.5M (30.6%)**, leaving $70.4M uncovered, and **13
 
 ## Q6. Which Procedures Occur Most Frequently?
 
+**Metric:** Number of times each procedure was performed.  
+**Method:** COUNTROWS(Procedures) by DESCRIPTION. procedures.csv has no primary key, so each row is treated as one procedure event.
+
 | # | Procedure | Count | Avg Base Cost |
 |---:|---|---:|---:|
 | 1 | Assessment of health and social care needs | 4,596 | $431 |
@@ -66,7 +83,12 @@ Payers covered **$31.1M of $101.5M (30.6%)**, leaving $70.4M uncovered, and **13
 | 9 | Medication reconciliation | 2,284 | $509 |
 | 10 | Screening for drug abuse | 1,484 | $431 |
 
+**Implication:** the most frequent procedures are low-cost assessments and screenings ($431 base cost), so they drive staff time rather than cost. Renal dialysis is the only top-10 procedure above $1,000 and, given its frequency, is the one to watch for capacity planning.
+
 ## Q7. Which Procedures Have the Highest Average Base Cost, Considering Frequency?
+
+**Metric:** Average base cost per procedure, for procedures recorded 10 or more times.  
+**Method:** AVERAGE(BASE_COST) by DESCRIPTION, keeping only procedures with at least 10 records; total base cost shown to reflect frequency.
 
 | Procedure (performed 10+ times) | Count | Avg base cost | Total base cost |
 |---|---:|---:|---:|
